@@ -1,5 +1,24 @@
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
+// Bogie class (custom object)
+class Bogie {
+    String name;
+    int capacity;
+
+    // Constructor
+    public Bogie(String name, int capacity) {
+        this.name = name;
+        this.capacity = capacity;
+    }
+
+    // toString() for easy printing
+    @Override
+    public String toString() {
+        return name + " (Capacity: " + capacity + ")";
+    }
+}
 
 public class TrainConsistManagementApp {
 
@@ -8,21 +27,27 @@ public class TrainConsistManagementApp {
         // Welcome message
         System.out.println("=== Train Consist Management App ===\n");
 
-        // Create HashMap for bogie-capacity mapping
-        Map<String, Integer> bogieCapacityMap = new HashMap<>();
+        // Create list of bogies
+        List<Bogie> bogies = new ArrayList<>();
 
-        // Add bogie capacities (key = bogie, value = capacity)
-        bogieCapacityMap.put("Sleeper", 72);
-        bogieCapacityMap.put("AC Chair", 60);
-        bogieCapacityMap.put("First Class", 24);
+        // Add bogies
+        bogies.add(new Bogie("Sleeper", 72));
+        bogies.add(new Bogie("AC Chair", 60));
+        bogies.add(new Bogie("First Class", 24));
 
-        // Display mapping
-        System.out.println("Bogie Capacity Details:\n");
+        // Display before sorting
+        System.out.println("Before Sorting:");
+        for (Bogie b : bogies) {
+            System.out.println(b);
+        }
 
-        // Iterate using entrySet()
-        for (Map.Entry<String, Integer> entry : bogieCapacityMap.entrySet()) {
-            System.out.println("Bogie: " + entry.getKey() +
-                    " | Capacity: " + entry.getValue());
+        // Sort using Comparator (by capacity)
+        bogies.sort(Comparator.comparingInt(b -> b.capacity));
+
+        // Display after sorting
+        System.out.println("\nAfter Sorting by Capacity (Ascending):");
+        for (Bogie b : bogies) {
+            System.out.println(b);
         }
 
         // Program continues
